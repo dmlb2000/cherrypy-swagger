@@ -1,0 +1,23 @@
+language: python
+python:
+- 2.6
+- 2.7
+- 3.2
+- 3.3
+- 3.4
+- 3.5
+- 3.5-dev
+- pypy
+- pypy3
+- nightly
+
+matrix:
+  fast_finish: true
+  include:
+    - python: 3.5
+      env: RUN_LINTS=true
+
+cache: pip
+
+before_install: 'if [ "$RUN_LINTS" = "true" ]; then pip install pre-commit; fi'
+script: 'if [ "$RUN_LINTS" = "true" ]; then pre-commit run --all-files; else echo Replace this with tests runner; fi'
