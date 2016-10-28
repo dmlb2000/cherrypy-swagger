@@ -2,3 +2,4 @@
 # 79 chars is too strict and we don't have 80-char terminals nowadays,
 # 160 chars is too much since it doesn't let us use split view efficiently:
 max-line-length = 120
+exclude = test.py
