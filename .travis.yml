@@ -20,4 +20,4 @@ matrix:
 cache: pip
 
 before_install: 'if [ "$RUN_LINTS" = "true" ]; then pip install pre-commit; fi'
-script: 'if [ "$RUN_LINTS" = "true" ]; then pre-commit run --all-files; else echo Replace this with tests runner; fi'
+script: 'if [ "$RUN_LINTS" = "true" ]; then pre-commit run --all-files; else bash -xe travis/unit-tests.sh; fi'
