@@ -1,3 +1,4 @@
 codeclimate-test-reporter
+nodeenv<1.0.0
 coverage
 pre-commit
