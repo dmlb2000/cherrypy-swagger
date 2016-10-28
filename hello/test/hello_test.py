@@ -3,7 +3,7 @@
 import unittest
 from hello import Hello
 
-class HelloTest(unittest.TestCase):
+class TestHello(unittest.TestCase):
     def test_hello(self):
         hello = Hello()
         self.assertEqual(hello.hello(), 'Hello!')

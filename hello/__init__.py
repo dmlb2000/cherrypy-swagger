@@ -1,5 +1,6 @@
 #!/usr/bin/python
 
+
 class Hello(object):
     def __init__(self):
         self._hello = 'Hello!'
