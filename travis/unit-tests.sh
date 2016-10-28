@@ -1,4 +1,4 @@
 #!/bin/bash -xe
 
-coverage run -m unittest discover
+coverage run -m unittest
 codeclimate-test-reporter
