@@ -16,6 +16,7 @@ class TestStringGenerator(helper.CPWebCase):
         cls.PORT = 1234
         cls.HOST = '127.0.0.1'
 
+    # pylint: disable=no-self-use
     def setUp(self):
         """Setup each test by starting the CherryPy server."""
         if not os.access(STRING_FILE, os.F_OK):
@@ -40,6 +41,7 @@ class TestStringGenerator(helper.CPWebCase):
         cherrypy.tree.mount(StringGeneratorWebService(), '/', conf)
         cherrypy.engine.start()
 
+    # pylint: disable=no-self-use
     def tearDown(self):
         """Tear down the CherryPy server after each test."""
         cherrypy.engine.exit()
