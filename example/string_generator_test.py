@@ -14,6 +14,7 @@ class TestStringGenerator(helper.CPWebCase):
     def setUpClass(cls):
         """Setup the class by changing the PORT."""
         cls.PORT = 1234
+        cls.HOST = '127.0.0.1'
 
     def setUp(self):
         """Setup each test by starting the CherryPy server."""
@@ -35,6 +36,7 @@ class TestStringGenerator(helper.CPWebCase):
                 'server.socket_port': 1234
             }
         }
+        cherrypy.config.update('testing.conf')
         cherrypy.tree.mount(StringGeneratorWebService(), '/', conf)
         cherrypy.engine.start()
 
