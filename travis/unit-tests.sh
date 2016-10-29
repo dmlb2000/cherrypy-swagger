@@ -1,4 +1,4 @@
 #!/bin/bash -xe
 
-coverage run test.py -v
+coverage run --include='example/*,hello/*' test.py -v
 codeclimate-test-reporter

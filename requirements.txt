@@ -1,3 +1,5 @@
+cherrypy
 codeclimate-test-reporter
 coverage
+nose
 pre-commit

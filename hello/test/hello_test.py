@@ -12,6 +12,3 @@ class TestHello(unittest.TestCase):
         """Test the Hello.hello() method."""
         hello = Hello()
         self.assertEqual(hello.hello(), 'Hello!')
-
-if __name__ == '__main__':
-    unittest.main()

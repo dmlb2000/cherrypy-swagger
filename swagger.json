@@ -1,0 +1,150 @@
+{
+  "basePath": "/",
+  "consumes": [
+    "application/json"
+  ],
+  "definitions": {
+    "Error": {
+      "properties": {
+        "code": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "message": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ],
+      "type": "object"
+    },
+    "String": {
+      "properties": {
+        "mystring": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "mystring"
+      ],
+      "type": "object"
+    }
+  },
+  "host": "localhost:1234",
+  "info": {
+    "license": {
+      "name": "MIT"
+    },
+    "title": "Swagger CherryPy",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/": {
+      "delete": {
+        "description": "deletes the string",
+        "operationId": "deleteString",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "string deleted"
+          },
+          "default": {
+            "description": "unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "getString",
+        "responses": {
+          "200": {
+            "description": "Your string sir.",
+            "schema": {
+              "$ref": "#/definitions/String"
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "summary": "Get my string",
+        "tags": []
+      },
+      "post": {
+        "description": "Creates a new random string",
+        "operationId": "randString",
+        "parameters": [
+          {
+            "description": "empty body",
+            "in": "body",
+            "name": "emptybody",
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "string response",
+            "schema": {
+              "$ref": "#/definitions/String"
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/{mystring}": {
+      "put": {
+        "description": "put the string",
+        "operationId": "putString",
+        "parameters": [
+          {
+            "description": "string to save",
+            "in": "path",
+            "name": "mystring",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "empty body",
+            "in": "body",
+            "name": "emptybody",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "string saved"
+          },
+          "default": {
+            "description": "unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    }
+  },
+  "produces": [
+    "application/json"
+  ],
+  "schemes": [
+    "http"
+  ],
+  "swagger": "2.0"
+}
