@@ -22,7 +22,10 @@ class StringGeneratorWebService(object):
     # pylint: disable=invalid-name
     def GET(self):
         """CherryPy Get Method."""
-        return {'mystring': open(STRING_FILE).read()}
+        strfd = open(STRING_FILE)
+        mystring = strfd.read()
+        strfd.close()
+        return {'mystring': mystring}
 
     @cherrypy.tools.json_out()
     # pylint: disable=no-self-use
@@ -30,7 +33,9 @@ class StringGeneratorWebService(object):
     def POST(self, length=8):
         """CherryPy Post Method."""
         some_string = ''.join(random.sample(string.hexdigits, int(length)))
-        open(STRING_FILE, 'w').write(some_string)
+        strfd = open(STRING_FILE, 'w')
+        strfd.write(some_string)
+        strfd.close()
         return {'mystring': some_string}
 
     @cherrypy.tools.json_out()
@@ -38,7 +43,9 @@ class StringGeneratorWebService(object):
     # pylint: disable=invalid-name
     def PUT(self, another_string):
         """CherryPy Put Method."""
-        open(STRING_FILE, 'w').write(another_string)
+        strfd = open(STRING_FILE, 'w')
+        strfd.write(another_string)
+        strfd.close()
         return {'mystring': another_string}
 
     @cherrypy.tools.json_out()
@@ -46,7 +53,9 @@ class StringGeneratorWebService(object):
     # pylint: disable=invalid-name
     def DELETE(self):
         """CherryPy Delete Method."""
-        os.ftruncate(os.open(STRING_FILE, os.O_WRONLY | os.O_CREAT), 0)
+        strfd = os.open(STRING_FILE, os.O_WRONLY | os.O_CREAT)
+        os.ftruncate(strfd, 0)
+        os.close(strfd)
         cherrypy.response.status = 204
         return ''
 
