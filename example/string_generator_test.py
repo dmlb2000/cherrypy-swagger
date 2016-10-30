@@ -10,15 +10,11 @@ from example.string_generator import StringGeneratorWebService, STRING_FILE
 class TestStringGenerator(helper.CPWebCase):
     """The test framework for string generator service."""
 
-    @classmethod
-    def setUpClass(cls):
-        """Setup the class by changing the PORT."""
-        cls.PORT = 1234
-        cls.HOST = '127.0.0.1'
-
     # pylint: disable=no-self-use
     def setUp(self):
         """Setup each test by starting the CherryPy server."""
+        self.PORT = 1234
+        self.HOST = '127.0.0.1'
         if not os.access(STRING_FILE, os.F_OK):
             os.ftruncate(os.open(STRING_FILE, os.O_WRONLY | os.O_CREAT), 0)
         swagger_headers = [
