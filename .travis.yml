@@ -31,7 +31,7 @@ install:
         "$PYENV_ROOT/bin/pyenv" install "pypy-$PYPY_VERSION"
         virtualenv --python="$PYENV_ROOT/versions/pypy-$PYPY_VERSION/bin/python" "$HOME/virtualenvs/pypy-$PYPY_VERSION"
         source "$HOME/virtualenvs/pypy-$PYPY_VERSION/bin/activate"
-        pip install -r requirements.txt --upgrade
       fi
+      pip install -r requirements.txt --upgrade
 before_install: 'if [ "$RUN_LINTS" = "true" ]; then pip install pre-commit; fi'
 script: 'if [ "$RUN_LINTS" = "true" ]; then pre-commit run --all-files; else bash -xe travis/unit-tests.sh; fi'
