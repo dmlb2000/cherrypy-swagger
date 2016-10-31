@@ -22,7 +22,7 @@ before_install:
   - |
       case "$TRAVIS_PYTHON_VERSION" in
         pypy) export PYPY_VERSION="pypy-2.6.1" ;;
-        pypy3) export PYPY_VERSION="pypy3.3-5.5-alpha" ;;
+        pypy3) export PYPY_VERSION="pypy3-2.4.0" ;;
       esac
       if ! [ -z "$PYPY_VERSION" ] ; then
         export PYENV_ROOT="$HOME/.pyenv"
