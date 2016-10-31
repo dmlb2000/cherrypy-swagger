@@ -10,7 +10,7 @@ Swagger Extensions for CherryPy
 
 ### Random String Generator
 
-`example/string_generator.py`
+`string_generator.py`
 
 This is a modified version of the CherryPy
 [Give us a REST](http://docs.cherrypy.org/en/latest/tutorials.html#tutorial-7-give-us-a-rest)
