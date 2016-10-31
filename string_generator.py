@@ -9,7 +9,8 @@ import random
 import string
 import cherrypy
 
-STRING_TO_KEEP = ""
+STRING_TO_KEEP = ''
+
 
 @cherrypy.expose
 class StringGeneratorWebService(object):
@@ -27,6 +28,7 @@ class StringGeneratorWebService(object):
     # pylint: disable=invalid-name
     def POST(length=8):
         """CherryPy Post Method."""
+        global STRING_TO_KEEP
         some_string = ''.join(random.sample(string.hexdigits, int(length)))
         STRING_TO_KEEP = some_string
         return {'mystring': some_string}
@@ -46,7 +48,7 @@ class StringGeneratorWebService(object):
     def DELETE():
         """CherryPy Delete Method."""
         global STRING_TO_KEEP
-        STRING_TO_KEEP = ""
+        STRING_TO_KEEP = ''
         cherrypy.response.status = 204
 
     @staticmethod

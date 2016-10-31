@@ -1,10 +1,9 @@
 #!/usr/bin/python
 """Test the string generator class."""
 
-import os
 import cherrypy
 from cherrypy.test import helper
-from string_generator import StringGeneratorWebService, STRING_TO_KEEP
+from string_generator import StringGeneratorWebService
 
 
 class TestStringGenerator(helper.CPWebCase):
@@ -15,7 +14,6 @@ class TestStringGenerator(helper.CPWebCase):
     @staticmethod
     def setup_server():
         """Setup each test by starting the CherryPy server."""
-        STRING_TO_KEEP = ""
         cherrypy.config.update('server.conf')
         cherrypy.tree.mount(StringGeneratorWebService(), '/', 'server.conf')
 

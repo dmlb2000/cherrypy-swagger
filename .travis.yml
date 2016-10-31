@@ -40,7 +40,7 @@ before_install:
       else
         pip install codeclimate-test-reporter coverage nose pytest
       fi
-script: 
+script:
   - |
       if [ "$RUN_LINTS" = "true" ] ; then
         pre-commit run --all-files
