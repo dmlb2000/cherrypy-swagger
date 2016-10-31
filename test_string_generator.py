@@ -4,45 +4,20 @@
 import os
 import cherrypy
 from cherrypy.test import helper
-from example.string_generator import StringGeneratorWebService, STRING_FILE
+from string_generator import StringGeneratorWebService, STRING_TO_KEEP
 
 
 class TestStringGenerator(helper.CPWebCase):
     """The test framework for string generator service."""
+    PORT = 1234
+    HOST = '127.0.0.1'
 
-    # pylint: disable=no-self-use
-    def setUp(self):
+    @staticmethod
+    def setup_server():
         """Setup each test by starting the CherryPy server."""
-        self.PORT = 1234
-        self.HOST = '127.0.0.1'
-        if not os.access(STRING_FILE, os.F_OK):
-            os.ftruncate(os.open(STRING_FILE, os.O_WRONLY | os.O_CREAT), 0)
-        swagger_headers = [
-            ('Access-Control-Allow-Origin', '*'),
-            ('Access-Control-Allow-Methods', 'GET, POST, DELETE, PUT'),
-            ('Access-Control-Allow-Headers', 'Content-Type, api_key, Authorization')
-        ]
-        conf = {
-            '/': {
-                'request.dispatch': cherrypy.dispatch.MethodDispatcher(),
-                'tools.response_headers.on': True,
-                'tools.response_headers.headers': swagger_headers,
-            },
-            'global': {
-                'server.socket_host': '0.0.0.0',
-                'server.socket_port': 1234
-            }
-        }
-        cherrypy.config.update('testing.conf')
-        cherrypy.tree.mount(StringGeneratorWebService(), '/', conf)
-        cherrypy.engine.start()
-
-    # pylint: disable=no-self-use
-    def tearDown(self):
-        """Tear down the CherryPy server after each test."""
-        cherrypy.engine.exit()
-        if os.access(STRING_FILE, os.F_OK):
-            os.unlink(STRING_FILE)
+        STRING_TO_KEEP = ""
+        cherrypy.config.update('server.conf')
+        cherrypy.tree.mount(StringGeneratorWebService(), '/', 'server.conf')
 
     def test_get_method(self):
         """Test the GET method."""

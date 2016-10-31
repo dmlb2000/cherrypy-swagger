@@ -7,63 +7,52 @@ modified for swagger to not use session support.
 """
 import random
 import string
-import os
 import cherrypy
 
-STRING_FILE = 'string.txt'
-
+STRING_TO_KEEP = ""
 
 @cherrypy.expose
 class StringGeneratorWebService(object):
     """String Generator Class."""
 
+    @staticmethod
     @cherrypy.tools.json_out()
-    # pylint: disable=no-self-use
     # pylint: disable=invalid-name
-    def GET(self):
+    def GET():
         """CherryPy Get Method."""
-        strfd = open(STRING_FILE)
-        mystring = strfd.read()
-        strfd.close()
-        return {'mystring': mystring}
+        return {'mystring': STRING_TO_KEEP}
 
+    @staticmethod
     @cherrypy.tools.json_out()
-    # pylint: disable=no-self-use
     # pylint: disable=invalid-name
-    def POST(self, length=8):
+    def POST(length=8):
         """CherryPy Post Method."""
         some_string = ''.join(random.sample(string.hexdigits, int(length)))
-        strfd = open(STRING_FILE, 'w')
-        strfd.write(some_string)
-        strfd.close()
+        STRING_TO_KEEP = some_string
         return {'mystring': some_string}
 
+    @staticmethod
     @cherrypy.tools.json_out()
-    # pylint: disable=no-self-use
     # pylint: disable=invalid-name
-    def PUT(self, another_string):
+    def PUT(another_string):
         """CherryPy Put Method."""
-        strfd = open(STRING_FILE, 'w')
-        strfd.write(another_string)
-        strfd.close()
+        global STRING_TO_KEEP
+        STRING_TO_KEEP = another_string
         return {'mystring': another_string}
 
+    @staticmethod
     @cherrypy.tools.json_out()
-    # pylint: disable=no-self-use
     # pylint: disable=invalid-name
-    def DELETE(self):
+    def DELETE():
         """CherryPy Delete Method."""
-        strfd = os.open(STRING_FILE, os.O_WRONLY | os.O_CREAT)
-        os.ftruncate(strfd, 0)
-        os.close(strfd)
+        global STRING_TO_KEEP
+        STRING_TO_KEEP = ""
         cherrypy.response.status = 204
-        return ''
 
+    @staticmethod
     @cherrypy.tools.json_out()
-    # pylint: disable=no-self-use
     # pylint: disable=unused-argument
     # pylint: disable=invalid-name
-    def OPTIONS(self, another_string=None):
+    def OPTIONS(another_string=None):
         """CherryPy Options Method."""
         cherrypy.response.status = 204
-        return ''
